@@ -12,9 +12,11 @@ function App() {
 
   const [cont, setContact] = useState(contacts);
 
-  const handleAdd = (contname, contphone) => {
-    console.log(`name:${contname} phone:${contphone}`);
-    const newContacts = [...cont, { name: contname, phone: contphone }];
+  const handleAdd = (contname, contphone, email, area) => {
+    const newContacts = [
+      ...cont,
+      { name: contname, phone: contphone, email: email, area: area },
+    ];
     setContact(newContacts);
   };
 

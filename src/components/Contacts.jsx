@@ -16,7 +16,8 @@ const Contacts = ({ listdata }) => {
                 <div className="contact-desc">
                   <p>{item.name}</p>
                   <p>{item.phone}</p>
-                  {/* <p>walter homes</p> */}
+                  <p>{item.email}</p>
+                  <p>{item.area}</p>
                 </div>
               </div>
               <div className="contact_op">

@@ -4,6 +4,8 @@ import usericon from "/usericon.svg";
 const AddComponent = ({ onAddCont }) => {
   const [name, setname] = useState("");
   const [phone, setphone] = useState("");
+  const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
 
   const onHandeleName = (e) => {
     setname(e.target.value);
@@ -15,9 +17,25 @@ const AddComponent = ({ onAddCont }) => {
     console.log(e.target.value);
   };
 
+  const onHandeleEmail = (e) => {
+    setEmail(e.target.value);
+    console.log(e.target.value);
+  };
+
+  const onHandeleAddr = (e) => {
+    setAddress(e.target.value);
+    console.log(e.target.value);
+  };
+
   const handleAdd = (e) => {
     e.preventDefault();
-    onAddCont(name, phone);
+    name === "" || email === "" || phone === "" || address === ""
+      ? alert("Please fill details")
+      : (onAddCont(name, phone, email, address),
+        setname(""),
+        setphone(""),
+        setEmail(""),
+        setAddress(""));
   };
 
   return (
@@ -27,7 +45,7 @@ const AddComponent = ({ onAddCont }) => {
             <img src={blob2} alt="blob2" className="cirlce2" /> */}
 
         <div className="add_content">
-          <form action="">
+          <form onSubmit={handleAdd}>
             <label htmlFor="imagepicker" className="">
               <img src={usericon} alt="" className="profile" />
             </label>
@@ -35,7 +53,8 @@ const AddComponent = ({ onAddCont }) => {
             <input
               className="input"
               type="text"
-              id="name"
+              name="name"
+              value={name}
               placeholder="Name"
               onChange={onHandeleName}
             />
@@ -44,12 +63,16 @@ const AddComponent = ({ onAddCont }) => {
               type="email"
               name="email"
               id="email"
+              value={email}
               placeholder="Email"
+              onChange={onHandeleEmail}
             />
             <input
               className="input mt-2 mb-2"
               type="number"
+              name="phonenumber"
               id="phonenumber"
+              value={phone}
               placeholder="phone number"
               onChange={onHandelePhone}
             />
@@ -58,7 +81,9 @@ const AddComponent = ({ onAddCont }) => {
               name="area"
               id="area"
               placeholder="address"
+              value={address}
               className="input"
+              onChange={onHandeleAddr}
             />
             <label>
               <input className="checkmark" type="checkbox" />
@@ -68,7 +93,6 @@ const AddComponent = ({ onAddCont }) => {
               className="text-uppercase button mt-5"
               type="submit"
               color="primary "
-              onClick={handleAdd}
             >
               Add Contact
             </button>
