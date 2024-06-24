@@ -39,13 +39,13 @@ const AddComponent = ({ onAddCont }) => {
               placeholder="Name"
               onChange={onHandeleName}
             />
-            {/* <input
+            <input
               className="input mt-2"
               type="email"
               name="email"
               id="email"
               placeholder="Email"
-            /> */}
+            />
             <input
               className="input mt-2 mb-2"
               type="number"
@@ -53,13 +53,13 @@ const AddComponent = ({ onAddCont }) => {
               placeholder="phone number"
               onChange={onHandelePhone}
             />
-            {/* <input
+            <input
               type="textarea"
               name="area"
               id="area"
               placeholder="address"
               className="input"
-            /> */}
+            />
             <label>
               <input className="checkmark" type="checkbox" />
               <span className="text-right">Mark as Star</span>
