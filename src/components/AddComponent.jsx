@@ -1,18 +1,23 @@
 import { useState } from "react";
 import usericon from "/usericon.svg";
 
-const AddComponent = () => {
-  const contacts = [];
-
-  const [cont, setcontact] = useState();
+const AddComponent = ({ onAddCont }) => {
   const [name, setname] = useState("");
-  const [phone, setphone] = useState();
+  const [phone, setphone] = useState("");
 
-  const handleAdd = () => {};
-
-  const onHandeleChange = (e) => {
+  const onHandeleName = (e) => {
     setname(e.target.value);
     console.log(e.target.value);
+  };
+
+  const onHandelePhone = (e) => {
+    setphone(e.target.value);
+    console.log(e.target.value);
+  };
+
+  const handleAdd = (e) => {
+    e.preventDefault();
+    onAddCont(name, phone);
   };
 
   return (
@@ -30,11 +35,9 @@ const AddComponent = () => {
             <input
               className="input"
               type="text"
-              name="name"
               id="name"
-              value={name}
               placeholder="Name"
-              onChange={onHandeleChange}
+              onChange={onHandeleName}
             />
             {/* <input
               className="input mt-2"
@@ -45,10 +48,10 @@ const AddComponent = () => {
             /> */}
             <input
               className="input mt-2 mb-2"
-              type="tel"
-              name="number"
+              type="number"
               id="phonenumber"
               placeholder="phone number"
+              onChange={onHandelePhone}
             />
             {/* <input
               type="textarea"
