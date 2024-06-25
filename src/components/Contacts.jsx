@@ -1,15 +1,18 @@
 import usericon from "/usericon.svg";
 import { FaStar } from "react-icons/fa";
 import { MdDelete, MdEdit } from "react-icons/md";
-const Contacts = ({ listdata }) => {
+const Contacts = ({ listdata, onDeleteData }) => {
+  const onhandleDel = (index) => {
+    onDeleteData(index);
+  };
   return (
     <>
       <div className="col-lg-12">
         {/* <img src={blob1} alt="blob1" className="cirlce1" />
             <img src={blob2} alt="blob2" className="cirlce2" /> */}
-        {listdata.map((item, index) => {
+        {listdata.map((item) => {
           return (
-            <div className="contact_content" key={index}>
+            <div className="contact_content" key={item.id}>
               <div className="contact-details">
                 <FaStar />
                 <img src={usericon} alt="" className="profile" />
@@ -21,7 +24,7 @@ const Contacts = ({ listdata }) => {
                 </div>
               </div>
               <div className="contact_op">
-                <button>
+                <button onClick={() => onhandleDel(item.id)}>
                   <MdDelete />
                 </button>
                 <button>
