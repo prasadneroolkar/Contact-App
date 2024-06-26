@@ -9,22 +9,18 @@ const AddComponent = ({ onAddCont }) => {
 
   const onHandeleName = (e) => {
     setname(e.target.value);
-    console.log(e.target.value);
   };
 
   const onHandelePhone = (e) => {
     setphone(e.target.value);
-    console.log(e.target.value);
   };
 
   const onHandeleEmail = (e) => {
     setEmail(e.target.value);
-    console.log(e.target.value);
   };
 
   const onHandeleAddr = (e) => {
     setAddress(e.target.value);
-    console.log(e.target.value);
   };
 
   const handleAdd = (e) => {

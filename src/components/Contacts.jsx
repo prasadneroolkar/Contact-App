@@ -1,9 +1,13 @@
 import usericon from "/usericon.svg";
 import { FaStar } from "react-icons/fa";
 import { MdDelete, MdEdit } from "react-icons/md";
-const Contacts = ({ listdata, onDeleteData }) => {
+const Contacts = ({ listdata, onDeleteData, onEditData }) => {
   const onhandleDel = (index) => {
     onDeleteData(index);
+  };
+
+  const onhandleEdit = (index) => {
+    onEditData(index);
   };
   return (
     <>
@@ -27,7 +31,7 @@ const Contacts = ({ listdata, onDeleteData }) => {
                 <button onClick={() => onhandleDel(item.id)}>
                   <MdDelete />
                 </button>
-                <button>
+                <button onClick={() => onhandleEdit(item.id)}>
                   <MdEdit className="icon " color="#54eafe" />
                 </button>
               </div>
