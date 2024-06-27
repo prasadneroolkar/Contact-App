@@ -110,7 +110,7 @@ const EditComponent = ({ onAddeditCont, contact, onCancel, verifyEdit }) => {
       <img src={blob2} alt="blob2" className="cirlce2" /> */}
 
         <div className="add_content">
-          <form onSubmit={onhandleEdit}>
+          <form onSubmit={onhandleEdit} className="formcard">
             <label htmlFor="imagepickerEdit" className="">
               <img
                 src={profileEditImageUrl || usericonedit}

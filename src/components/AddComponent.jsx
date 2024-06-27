@@ -81,7 +81,7 @@ const AddComponent = ({ onAddCont, verify }) => {
             <img src={blob2} alt="blob2" className="cirlce2" /> */}
 
         <div className="add_content">
-          <form onSubmit={handleAdd}>
+          <form className="formcard" onSubmit={handleAdd}>
             <label htmlFor="imagepicker" className="">
               <img
                 src={profileImageUrl || usericon}
@@ -100,7 +100,7 @@ const AddComponent = ({ onAddCont, verify }) => {
             </label>
 
             <input
-              className="input"
+              className="input mt-4"
               type="text"
               name="name"
               value={name}
@@ -108,7 +108,7 @@ const AddComponent = ({ onAddCont, verify }) => {
               onChange={onHandeleName}
             />
             <input
-              className="input mt-2"
+              className="input mt-3"
               type="email"
               name="email"
               id="email"
@@ -117,7 +117,7 @@ const AddComponent = ({ onAddCont, verify }) => {
               onChange={onHandeleEmail}
             />
             <input
-              className="input mt-2 mb-2"
+              className="input mt-3"
               type="tel"
               name="phonenumber"
               id="phonenumber"
@@ -131,17 +131,31 @@ const AddComponent = ({ onAddCont, verify }) => {
               id="area"
               placeholder="address"
               value={address}
-              className="input"
+              className="input mt-3 mb-2"
+              style={{ height: "80px" }}
               onChange={onHandeleAddr}
             />
-            <label>
+            <label className="mt-2">
               <input className="checkmark" type="checkbox" />
-              <span className="text-right">Mark as Star</span>
+              <span
+                className="text-right"
+                style={{
+                  color: "#f9f9f9",
+                  fontWeight: "400",
+                  letterSpacing: "1px",
+                }}
+              >
+                Mark as Star
+              </span>
             </label>
             <button
               className="text-uppercase button mt-5"
               type="submit"
               color="primary "
+              style={{
+                padding: "15px",
+                fontSize: "18px",
+              }}
             >
               Add Contact
             </button>

@@ -11,7 +11,7 @@ const Contacts = ({ listdata, onDeleteData, onEditData }) => {
   };
   return (
     <>
-      <div className="col-lg-12">
+      <div className="col-lg-10 mx-auto">
         {/* <img src={blob1} alt="blob1" className="cirlce1" />
             <img src={blob2} alt="blob2" className="cirlce2" /> */}
         {listdata.map((item) => {
@@ -25,19 +25,34 @@ const Contacts = ({ listdata, onDeleteData, onEditData }) => {
                   className="profile"
                 />
                 <div className="contact-desc">
-                  <p>{item.name}</p>
-                  <p>{item.phone}</p>
-                  <p>{item.email}</p>
-                  <p>{item.area}</p>
+                  <p className="name">{item.name}</p>
+                  <p className="phone" style={{ opacity: "80%" }}>
+                    {item.phone}
+                  </p>
+                  <p className="mail" style={{ opacity: "50%" }}>
+                    {item.email}
+                  </p>
+                  <p className="location" style={{ opacity: "70%" }}>
+                    {item.area}
+                  </p>
                 </div>
               </div>
               <div className="contact_op">
-                <button onClick={() => onhandleDel(item.id)}>
-                  <MdDelete />
-                </button>
-                <button onClick={() => onhandleEdit(item.id)}>
-                  <MdEdit className="icon " color="#54eafe" />
-                </button>
+                <div className="iconbtn">
+                  <MdDelete
+                    onClick={() => onhandleDel(item.id)}
+                    color="#FF6370"
+                    className=" icon"
+                    style={{ zIndex: "1" }}
+                  />
+                </div>
+                <div className="iconbtn" style={{ marginRight: "30px" }}>
+                  <MdEdit
+                    className="icon"
+                    color="#54eafe"
+                    onClick={() => onhandleEdit(item.id)}
+                  />
+                </div>
               </div>
             </div>
           );

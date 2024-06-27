@@ -81,7 +81,7 @@ function App() {
 
   return (
     <>
-      <nav>
+      <nav className="nav">
         <p>Contact App</p>
       </nav>
       <Container>
