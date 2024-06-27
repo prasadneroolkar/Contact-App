@@ -24,7 +24,7 @@ function App() {
     localStorage.setItem("ContactList", JSON.stringify(cont));
   }, [cont]);
 
-  const handleAdd = (contname, contphone, email, area) => {
+  const handleAdd = (contname, contphone, email, area, profile) => {
     const newContacts = [
       ...cont,
       {
@@ -33,6 +33,7 @@ function App() {
         phone: contphone,
         email: email,
         area: area,
+        profileImg: profile,
       },
     ];
     setContact(newContacts);
@@ -40,13 +41,19 @@ function App() {
     // toast.success("Contact added successfully!");
   };
 
-  const updateEdit = (cid, contname, contphone, email, area) => {
-    console.log(`edit contact : ${cid}, ${contname}`);
+  const updateEdit = (cid, contname, contphone, email, area, prof) => {
     const updatedCont = cont.map((elem) => {
       console.log(elem);
 
       return elem.id === cid
-        ? { ...elem, name: contname, phone: contphone, email, area }
+        ? {
+            ...elem,
+            name: contname,
+            phone: contphone,
+            email,
+            area,
+            profileImg: prof,
+          }
         : elem;
     });
 
@@ -83,6 +90,7 @@ function App() {
           contact={editContact}
           onAddeditCont={updateEdit}
           onCancel={cancelEdit}
+          verifyEdit={cont}
         />
       </Container>
       <Container>

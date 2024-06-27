@@ -1,10 +1,14 @@
 import { useState, useEffect } from "react";
-import usericon from "/usericon.svg";
-const EditComponent = ({ onAddeditCont, contact, onCancel }) => {
+import usericonedit from "/usericon.svg";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+const EditComponent = ({ onAddeditCont, contact, onCancel, verifyEdit }) => {
   const [editname, seteditname] = useState("");
   const [editphone, seteditphone] = useState("");
   const [editemail, seteditEmail] = useState("");
   const [editaddress, seteditAddress] = useState("");
+  const [profileEditImage, setProfileEditImage] = useState(null);
+  const [profileEditImageUrl, setProfileEditImageUrl] = useState(null);
 
   useEffect(() => {
     if (contact) {
@@ -12,6 +16,8 @@ const EditComponent = ({ onAddeditCont, contact, onCancel }) => {
       seteditphone(contact.phone || "");
       seteditEmail(contact.email || "");
       seteditAddress(contact.area || "");
+      setProfileEditImage(contact.profileImg || null);
+      setProfileEditImageUrl(contact.profileImg || usericonedit);
     }
   }, [contact]);
 
@@ -31,19 +37,70 @@ const EditComponent = ({ onAddeditCont, contact, onCancel }) => {
   const onHandeleeditAddr = (e) => {
     seteditAddress(e.target.value);
   };
+  const handleProfileImageEdit = (e) => {
+    const fileEdit = e.target.files[0];
+    if (fileEdit) {
+      setProfileEditImage(fileEdit);
+      setProfileEditImageUrl(URL.createObjectURL(fileEdit));
+    }
+  };
 
   const onhandleEdit = (e) => {
     e.preventDefault();
-    editname === "" ||
-    editemail === "" ||
-    editphone === "" ||
-    editaddress === ""
-      ? alert("Please fill details")
-      : (onAddeditCont(contact.id, editname, editphone, editemail, editaddress),
-        seteditname(""),
-        seteditphone(""),
-        seteditEmail(""),
-        seteditAddress(""));
+
+    if (editname === "" || editemail === "" || editphone === "") {
+      toast.error("Please fill all details.");
+      return;
+    }
+
+    // Check if email is being updated and already exists
+    if (
+      editemail !== contact.email &&
+      verifyEdit.some((cont) => cont.email === editemail)
+    ) {
+      toast.error("Email is already in use.");
+      return;
+    }
+
+    // Check if phone number is being updated and already exists
+    if (
+      editphone !== contact.phone &&
+      verifyEdit.some(
+        (cont) => cont.phone === editphone && cont.id !== contact.id
+      )
+    ) {
+      toast.error("Phone number is already in use.");
+      return;
+    }
+
+    const addContactEdit = (profileEditImageBase64) => {
+      onAddeditCont(
+        contact.id,
+        editname,
+        editphone,
+        editemail,
+        editaddress,
+        profileEditImageBase64
+      );
+      seteditname("");
+      seteditphone("");
+      seteditEmail("");
+      seteditAddress("");
+      setProfileEditImage(null);
+      setProfileEditImageUrl(null);
+      toast.success("Contact updated successfully!");
+    };
+    if (profileEditImage) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const profileEditImageBase64 = reader.result;
+        addContactEdit(profileEditImageBase64);
+      };
+      reader.readAsDataURL(profileEditImage);
+    } else {
+      // Handle case where no profile image is selected
+      addContactEdit(contact.profileImg); // or null, or any default value you want to use
+    }
   };
   return (
     <>
@@ -54,8 +111,21 @@ const EditComponent = ({ onAddeditCont, contact, onCancel }) => {
 
         <div className="add_content">
           <form onSubmit={onhandleEdit}>
-            <label htmlFor="imagepicker" className="">
-              <img src={usericon} alt="" className="profile" />
+            <label htmlFor="imagepickerEdit" className="">
+              <img
+                src={profileEditImageUrl || usericonedit}
+                alt=""
+                className="profile"
+              />
+              <input
+                type="file"
+                name="Editimage"
+                id="imagepickerEdit"
+                accept="image/*"
+                multiple={false}
+                onChange={handleProfileImageEdit}
+                className="hidden"
+              />
             </label>
 
             <input
@@ -77,7 +147,7 @@ const EditComponent = ({ onAddeditCont, contact, onCancel }) => {
             />
             <input
               className="input mt-2 mb-2"
-              type="number"
+              type="tel"
               name="editphonenumber"
               id="editphonenumber"
               value={editphone}

@@ -8,6 +8,8 @@ const AddComponent = ({ onAddCont, verify }) => {
   const [phone, setphone] = useState("");
   const [email, setEmail] = useState("");
   const [address, setAddress] = useState("");
+  const [profileImage, setProfileImage] = useState(null);
+  const [profileImageUrl, setProfileImageUrl] = useState(null);
 
   const onHandeleName = (e) => {
     setname(e.target.value);
@@ -23,6 +25,13 @@ const AddComponent = ({ onAddCont, verify }) => {
 
   const onHandeleAddr = (e) => {
     setAddress(e.target.value);
+  };
+  const handleProfileImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setProfileImage(file);
+      setProfileImageUrl(URL.createObjectURL(file));
+    }
   };
 
   const handleAdd = (e) => {
@@ -42,14 +51,27 @@ const AddComponent = ({ onAddCont, verify }) => {
       toast.error("Phone number is already in use.");
       return;
     }
+    const addContact = (profileImageBase64) => {
+      onAddCont(name, phone, email, address, profileImageBase64);
 
-    onAddCont(name, phone, email, address);
-
-    setname(""); // Clear name field
-    setphone(""); // Clear phone field
-    setEmail(""); // Clear email field
-    setAddress(""); // Clear area field
-    toast.success("Contact added successfully!");
+      setname(""); // Clear name field
+      setphone(""); // Clear phone field
+      setEmail(""); // Clear email field
+      setAddress(""); // Clear area field
+      setProfileImage(null);
+      setProfileImageUrl(null);
+      toast.success("Contact added successfully!");
+    };
+    if (profileImage) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const profileImageBase64 = reader.result;
+        addContact(profileImageBase64);
+      };
+      reader.readAsDataURL(profileImage);
+    } else {
+      addContact(null);
+    }
   };
 
   return (
@@ -61,7 +83,20 @@ const AddComponent = ({ onAddCont, verify }) => {
         <div className="add_content">
           <form onSubmit={handleAdd}>
             <label htmlFor="imagepicker" className="">
-              <img src={usericon} alt="" className="profile" />
+              <img
+                src={profileImageUrl || usericon}
+                alt=""
+                className="profile"
+              />
+              <input
+                type="file"
+                name="image"
+                id="imagepicker"
+                accept="image/*"
+                multiple={false}
+                onChange={handleProfileImageChange}
+                className="hidden"
+              />
             </label>
 
             <input

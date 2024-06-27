@@ -19,7 +19,11 @@ const Contacts = ({ listdata, onDeleteData, onEditData }) => {
             <div className="contact_content" key={item.id}>
               <div className="contact-details">
                 <FaStar />
-                <img src={usericon} alt="" className="profile" />
+                <img
+                  src={item.profileImg || usericon}
+                  alt=""
+                  className="profile"
+                />
                 <div className="contact-desc">
                   <p>{item.name}</p>
                   <p>{item.phone}</p>

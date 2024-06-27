@@ -245,10 +245,14 @@ textarea:-moz-placeholder {
 }
 .profile {
   border-radius: 50%;
-  border-color: none !important;
+  border-color: none;
   width: 110px;
   height: 110px;
   background: transparent;
   background-color: transparent;
   object-fit: cover;
+}
+
+.hidden {
+  display: none;
 }
