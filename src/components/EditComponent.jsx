@@ -1,16 +1,18 @@
 import { useState, useEffect } from "react";
 import usericon from "/usericon.svg";
 const EditComponent = ({ onAddeditCont, contact, onCancel }) => {
-  const [editname, seteditname] = useState(contact.name || "");
-  const [editphone, seteditphone] = useState(contact.phone || "");
-  const [editemail, seteditEmail] = useState(contact.email || "");
-  const [editaddress, seteditAddress] = useState(contact.area || "");
+  const [editname, seteditname] = useState("");
+  const [editphone, seteditphone] = useState("");
+  const [editemail, seteditEmail] = useState("");
+  const [editaddress, seteditAddress] = useState("");
 
   useEffect(() => {
-    seteditname(contact.name || "");
-    seteditphone(contact.phone || "");
-    seteditEmail(contact.email || "");
-    seteditAddress(contact.area || "");
+    if (contact) {
+      seteditname(contact.name || "");
+      seteditphone(contact.phone || "");
+      seteditEmail(contact.email || "");
+      seteditAddress(contact.area || "");
+    }
   }, [contact]);
 
   const onHandeleeditName = (e) => {

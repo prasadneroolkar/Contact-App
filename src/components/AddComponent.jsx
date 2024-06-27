@@ -1,7 +1,9 @@
 import { useState } from "react";
 import usericon from "/usericon.svg";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-const AddComponent = ({ onAddCont }) => {
+const AddComponent = ({ onAddCont, verify }) => {
   const [name, setname] = useState("");
   const [phone, setphone] = useState("");
   const [email, setEmail] = useState("");
@@ -25,13 +27,29 @@ const AddComponent = ({ onAddCont }) => {
 
   const handleAdd = (e) => {
     e.preventDefault();
-    name === "" || email === "" || phone === "" || address === ""
-      ? alert("Please fill details")
-      : (onAddCont(name, phone, email, address),
-        setname(""),
-        setphone(""),
-        setEmail(""),
-        setAddress(""));
+    // Check if any field is empty
+    if (name === "" || phone === "" || email === "") {
+      toast.error("Please fill all details.");
+      return;
+    }
+
+    // Check for existing email or phone number
+    if (verify.some((contact) => contact.email === email)) {
+      toast.error("Email is already in use.");
+      return;
+    }
+    if (verify.some((contact) => contact.phone === phone)) {
+      toast.error("Phone number is already in use.");
+      return;
+    }
+
+    onAddCont(name, phone, email, address);
+
+    setname(""); // Clear name field
+    setphone(""); // Clear phone field
+    setEmail(""); // Clear email field
+    setAddress(""); // Clear area field
+    toast.success("Contact added successfully!");
   };
 
   return (
@@ -65,7 +83,7 @@ const AddComponent = ({ onAddCont }) => {
             />
             <input
               className="input mt-2 mb-2"
-              type="number"
+              type="tel"
               name="phonenumber"
               id="phonenumber"
               value={phone}
