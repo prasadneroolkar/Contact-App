@@ -1,5 +1,5 @@
 import usericon from "/usericon.svg";
-import { FaStar } from "react-icons/fa";
+import { FaRegStar, FaStar } from "react-icons/fa";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { Link } from "react-router-dom";
 
@@ -18,9 +18,10 @@ const Contacts = ({ listdata, onDeleteData, onEditData }) => {
             <img src={blob2} alt="blob2" className="cirlce2" /> */}
         {listdata.map((item) => {
           return (
-            <div className="contact_content" key={item.id}>
+            <div className="contact_content mb-4" key={item.id}>
               <div className="contact-details">
-                <FaStar />
+                {item.star === false ? <FaRegStar /> : <FaStar />}
+
                 <img
                   src={item.profileImg || usericon}
                   alt=""

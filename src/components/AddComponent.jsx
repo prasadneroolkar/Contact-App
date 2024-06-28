@@ -2,6 +2,7 @@ import { useState } from "react";
 import usericon from "/usericon.svg";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { Link } from "react-router-dom";
 
 const AddComponent = ({ onAddCont, verify }) => {
   const [name, setname] = useState("");
@@ -10,6 +11,7 @@ const AddComponent = ({ onAddCont, verify }) => {
   const [address, setAddress] = useState("");
   const [profileImage, setProfileImage] = useState(null);
   const [profileImageUrl, setProfileImageUrl] = useState(null);
+  const [check, setCheck] = useState(false);
 
   const onHandeleName = (e) => {
     setname(e.target.value);
@@ -33,6 +35,9 @@ const AddComponent = ({ onAddCont, verify }) => {
       setProfileImageUrl(URL.createObjectURL(file));
     }
   };
+  const handleCheck = () => {
+    setCheck(!check);
+  };
 
   const handleAdd = (e) => {
     e.preventDefault();
@@ -52,7 +57,7 @@ const AddComponent = ({ onAddCont, verify }) => {
       return;
     }
     const addContact = (profileImageBase64) => {
-      onAddCont(name, phone, email, address, profileImageBase64);
+      onAddCont(name, phone, email, address, profileImageBase64, check);
 
       setname(""); // Clear name field
       setphone(""); // Clear phone field
@@ -60,7 +65,9 @@ const AddComponent = ({ onAddCont, verify }) => {
       setAddress(""); // Clear area field
       setProfileImage(null);
       setProfileImageUrl(null);
+      setCheck(null);
       toast.success("Contact added successfully!");
+      window.location.href = "/contacts";
     };
     if (profileImage) {
       const reader = new FileReader();
@@ -136,7 +143,11 @@ const AddComponent = ({ onAddCont, verify }) => {
               onChange={onHandeleAddr}
             />
             <label className="mt-2">
-              <input className="checkmark" type="checkbox" />
+              <input
+                className="checkmark"
+                type="checkbox"
+                onChange={handleCheck}
+              />
               <span
                 className="text-right"
                 style={{
@@ -148,6 +159,7 @@ const AddComponent = ({ onAddCont, verify }) => {
                 Mark as Star
               </span>
             </label>
+
             <button
               className="text-uppercase button mt-5"
               type="submit"

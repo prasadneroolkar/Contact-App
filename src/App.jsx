@@ -24,7 +24,8 @@ function App() {
     localStorage.setItem("ContactList", JSON.stringify(cont));
   }, [cont]);
 
-  const handleAdd = (contname, contphone, email, area, profile) => {
+  const handleAdd = (contname, contphone, email, area, profile, star) => {
+    console.log(star);
     const newContacts = [
       ...cont,
       {
@@ -34,10 +35,11 @@ function App() {
         email: email,
         area: area,
         profileImg: profile,
+        star: star,
       },
     ];
     setContact(newContacts);
-
+    console.log(newContacts);
     // toast.success("Contact added successfully!");
   };
 
@@ -110,11 +112,15 @@ function App() {
           path="/contacts"
           element={
             <Container>
-              <Contacts
-                listdata={cont}
-                onDeleteData={handleDel}
-                onEditData={handleEdit}
-              />
+              {cont.length === 0 ? (
+                "No Contacts listed"
+              ) : (
+                <Contacts
+                  listdata={cont}
+                  onDeleteData={handleDel}
+                  onEditData={handleEdit}
+                />
+              )}
             </Container>
           }
         />
