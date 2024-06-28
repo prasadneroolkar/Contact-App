@@ -9,7 +9,7 @@ import Contacts from "./components/Contacts";
 import AddComponent from "./components/AddComponent";
 import { useEffect, useState } from "react";
 import EditComponent from "./components/EditComponent";
-// import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 
 function App() {
   // const contacts = [];
@@ -84,47 +84,42 @@ function App() {
       <nav className="nav">
         <p>Contact App</p>
       </nav>
-      <Container>
-        <AddComponent onAddCont={handleAdd} verify={cont} />
-        <EditComponent
-          contact={editContact}
-          onAddeditCont={updateEdit}
-          onCancel={cancelEdit}
-          verifyEdit={cont}
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Container>
+              <AddComponent onAddCont={handleAdd} verify={cont} />
+            </Container>
+          }
         />
-      </Container>
-      <Container>
-        <Contacts
-          listdata={cont}
-          onDeleteData={handleDel}
-          onEditData={handleEdit}
+        <Route
+          path="/edit/:edit"
+          element={
+            <Container>
+              <EditComponent
+                contact={editContact}
+                onAddeditCont={updateEdit}
+                onCancel={cancelEdit}
+                verifyEdit={cont}
+              />
+            </Container>
+          }
         />
-      </Container>
+        <Route
+          path="/contacts"
+          element={
+            <Container>
+              <Contacts
+                listdata={cont}
+                onDeleteData={handleDel}
+                onEditData={handleEdit}
+              />
+            </Container>
+          }
+        />
+      </Routes>
       <ToastContainer />
-      {/* <Router>
-        <nav>
-          <Link to="/">Add Contact</Link>
-          <Link to="/contacts">View Contacts</Link>
-        </nav>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Container>
-                <AddComponent onAddCont={handleAdd} />
-              </Container>
-            }
-          />
-          <Route
-            path="/contacts"
-            element={
-              <Container>
-                <Contacts listdata={cont} onDeleteData={handleDel} />
-              </Container>
-            }
-          />
-        </Routes>
-      </Router> */}
     </>
   );
 }

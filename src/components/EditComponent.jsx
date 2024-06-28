@@ -129,7 +129,7 @@ const EditComponent = ({ onAddeditCont, contact, onCancel, verifyEdit }) => {
             </label>
 
             <input
-              className="input"
+              className="input  mt-4"
               type="text"
               name="editname"
               value={editname}
@@ -137,7 +137,7 @@ const EditComponent = ({ onAddeditCont, contact, onCancel, verifyEdit }) => {
               onChange={onHandeleeditName}
             />
             <input
-              className="input mt-2"
+              className="input mt-3"
               type="email"
               name="editemail"
               id="editemail"
@@ -146,7 +146,7 @@ const EditComponent = ({ onAddeditCont, contact, onCancel, verifyEdit }) => {
               onChange={onHandeleeditEmail}
             />
             <input
-              className="input mt-2 mb-2"
+              className="input mt-3"
               type="tel"
               name="editphonenumber"
               id="editphonenumber"
@@ -160,17 +160,31 @@ const EditComponent = ({ onAddeditCont, contact, onCancel, verifyEdit }) => {
               id="area"
               placeholder="address"
               value={editaddress}
-              className="input"
+              style={{ height: "80px" }}
+              className="input mt-3 mb-2"
               onChange={onHandeleeditAddr}
             />
-            {/* <label>
+            <label className="mt-2">
               <input className="checkmark" type="checkbox" />
-              <span className="text-right">Mark as Star</span>
-            </label> */}
+              <span
+                className="text-right"
+                style={{
+                  color: "#f9f9f9",
+                  fontWeight: "400",
+                  letterSpacing: "1px",
+                }}
+              >
+                Mark as Star
+              </span>
+            </label>
             <button
               className="text-uppercase button mt-5"
               type="submit"
               color="primary "
+              style={{
+                padding: "15px",
+                fontSize: "18px",
+              }}
             >
               Update Contact
             </button>
@@ -179,6 +193,10 @@ const EditComponent = ({ onAddeditCont, contact, onCancel, verifyEdit }) => {
               className="text-uppercase button mt-5"
               type="button"
               onClick={onCancel}
+              style={{
+                padding: "15px",
+                fontSize: "18px",
+              }}
             >
               Cancel
             </button>

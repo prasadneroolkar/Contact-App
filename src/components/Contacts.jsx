@@ -1,6 +1,8 @@
 import usericon from "/usericon.svg";
 import { FaStar } from "react-icons/fa";
 import { MdDelete, MdEdit } from "react-icons/md";
+import { Link } from "react-router-dom";
+
 const Contacts = ({ listdata, onDeleteData, onEditData }) => {
   const onhandleDel = (index) => {
     onDeleteData(index);
@@ -46,12 +48,16 @@ const Contacts = ({ listdata, onDeleteData, onEditData }) => {
                     style={{ zIndex: "1" }}
                   />
                 </div>
-                <div className="iconbtn" style={{ marginRight: "30px" }}>
-                  <MdEdit
-                    className="icon"
-                    color="#54eafe"
+
+                <div>
+                  <Link
+                    to={`/edit/${item.id}`}
+                    className="iconbtn"
+                    style={{ marginRight: "30px" }}
                     onClick={() => onhandleEdit(item.id)}
-                  />
+                  >
+                    <MdEdit className="icon" color="#54eafe" />
+                  </Link>
                 </div>
               </div>
             </div>
