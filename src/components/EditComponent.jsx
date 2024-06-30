@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import usericonedit from "/usericon.svg";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -10,6 +11,7 @@ const EditComponent = ({ onAddeditCont, contact, onCancel, verifyEdit }) => {
   const [profileEditImage, setProfileEditImage] = useState(null);
   const [profileEditImageUrl, setProfileEditImageUrl] = useState(null);
   const [check, setCheck] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (contact) {
@@ -101,6 +103,7 @@ const EditComponent = ({ onAddeditCont, contact, onCancel, verifyEdit }) => {
       setProfileEditImageUrl(null);
       setCheck("");
       toast.success("Contact updated successfully!");
+      navigate("/contacts");
     };
     if (profileEditImage) {
       const reader = new FileReader();

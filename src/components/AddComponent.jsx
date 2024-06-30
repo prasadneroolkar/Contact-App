@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import usericon from "/usericon.svg";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { Link } from "react-router-dom";
+import blob1 from "/blob1.svg";
+import blob2 from "/blob2.svg";
 
 const AddComponent = ({ onAddCont, verify }) => {
   const [name, setname] = useState("");
@@ -12,6 +14,7 @@ const AddComponent = ({ onAddCont, verify }) => {
   const [profileImage, setProfileImage] = useState(null);
   const [profileImageUrl, setProfileImageUrl] = useState(null);
   const [check, setCheck] = useState(false);
+  const navigate = useNavigate();
 
   const onHandeleName = (e) => {
     setname(e.target.value);
@@ -67,7 +70,8 @@ const AddComponent = ({ onAddCont, verify }) => {
       setProfileImageUrl(null);
       setCheck(null);
       toast.success("Contact added successfully!");
-      window.location.href = "/contacts";
+
+      navigate("/contacts");
     };
     if (profileImage) {
       const reader = new FileReader();
@@ -84,10 +88,9 @@ const AddComponent = ({ onAddCont, verify }) => {
   return (
     <>
       <div className="col-lg-6 mx-auto">
-        {/* <img src={blob1} alt="blob1" className="cirlce1" />
-            <img src={blob2} alt="blob2" className="cirlce2" /> */}
-
         <div className="add_content">
+          <img src={blob1} alt="blob1" className="cirlce1" />
+          <img src={blob2} alt="blob2" className="cirlce2" />
           <form className="formcard" onSubmit={handleAdd}>
             <label htmlFor="imagepicker" className="">
               <img

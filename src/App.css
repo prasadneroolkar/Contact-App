@@ -269,19 +269,19 @@ input.checkmark {
 }
 
 .cirlce1 {
-  height: 20rem;
-  width: 20rem;
+  height: 10rem;
+  width: 10rem;
   position: absolute;
-  top: 50%;
-  left: 73%;
+  top: 65px;
+  left: 65%;
 }
 
 .cirlce2 {
   height: 20rem;
   width: 20rem;
   position: absolute;
-  top: 20%;
-  left: 12%;
+  bottom: -176px;
+  left: 21%;
 }
 .profile {
   border-radius: 50%;
