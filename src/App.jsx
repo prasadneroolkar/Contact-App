@@ -1,15 +1,19 @@
 import Container from "./components/Container";
 import "./App.css";
 import { v4 as uuidv4 } from "uuid";
-// import blob1 from "/blob1.svg";
-// import blob2 from "/blob2.svg";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Contacts from "./components/Contacts";
 import AddComponent from "./components/AddComponent";
 import { useEffect, useState } from "react";
 import EditComponent from "./components/EditComponent";
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  Link,
+  useNavigate,
+} from "react-router-dom";
 
 function App() {
   // const contacts = [];
@@ -19,6 +23,7 @@ function App() {
   });
 
   const [editContact, setEditContact] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     localStorage.setItem("ContactList", JSON.stringify(cont));
@@ -80,6 +85,7 @@ function App() {
   };
   const cancelEdit = () => {
     setEditContact([]);
+    navigate("/contacts");
   };
 
   return (

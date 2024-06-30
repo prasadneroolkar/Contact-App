@@ -87,10 +87,9 @@ const AddComponent = ({ onAddCont, verify }) => {
 
   return (
     <>
-      <div className="col-lg-6 mx-auto">
+      <div className="col-lg-5 mx-auto">
         <div className="add_content">
           <img src={blob1} alt="blob1" className="cirlce1" />
-          <img src={blob2} alt="blob2" className="cirlce2" />
           <form className="formcard" onSubmit={handleAdd}>
             <label htmlFor="imagepicker" className="">
               <img
@@ -175,6 +174,7 @@ const AddComponent = ({ onAddCont, verify }) => {
               Add Contact
             </button>
           </form>
+          <img src={blob2} alt="blob2" className="cirlce2" />
         </div>
       </div>
     </>

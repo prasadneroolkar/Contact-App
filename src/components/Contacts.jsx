@@ -2,6 +2,8 @@ import usericon from "/usericon.svg";
 import { FaRegStar, FaStar } from "react-icons/fa";
 import { MdDelete, MdEdit } from "react-icons/md";
 import { Link } from "react-router-dom";
+import blob1 from "/blob1.svg";
+import blob2 from "/blob2.svg";
 
 const Contacts = ({ listdata, onDeleteData, onEditData }) => {
   const onhandleDel = (index) => {
@@ -13,9 +15,8 @@ const Contacts = ({ listdata, onDeleteData, onEditData }) => {
   };
   return (
     <>
-      <div className="col-lg-10 mx-auto">
-        {/* <img src={blob1} alt="blob1" className="cirlce1" />
-            <img src={blob2} alt="blob2" className="cirlce2" /> */}
+      <div className="col-lg-9 mx-auto add_content">
+        <img src={blob1} alt="blob1" className="cirlce4" />
         {listdata.map((item) => {
           return (
             <div className="contact_content mb-4" key={item.id}>
@@ -64,6 +65,11 @@ const Contacts = ({ listdata, onDeleteData, onEditData }) => {
             </div>
           );
         })}
+        <img src={blob2} alt="blob2" className="cirlce3" />
+
+        <Link to="/" className="fab sticky-bottom d-print-inline-flex">
+          Add Contact
+        </Link>
       </div>
     </>
   );

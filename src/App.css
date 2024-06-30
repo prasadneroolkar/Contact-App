@@ -72,25 +72,8 @@ form {
   flex-direction: column;
 }
 
-.add_contents {
-  background: white;
-  background: linear-gradient(
-    to right bottom,
-    rgba(255, 255, 255, 0.1),
-    rgba(255, 255, 255, 0.06)
-  );
-  border-top: 1px solid rgba(255, 255, 255, 0.3);
-  border-left: 1px solid rgba(255, 255, 255, 0.3);
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  background-clip: padding-box;
-  border-radius: 10px !important;
-  z-index: 2;
-  backdrop-filter: blur(20px);
-  padding: 60px;
-  padding-bottom: 70px;
-  padding-left: 80px;
-  padding-right: 80px;
+.add_content {
+  position: relative;
 }
 
 .input {
@@ -196,6 +179,31 @@ textarea:-moz-placeholder {
 .button:hover {
   color: #f9f9f9;
 }
+.fab {
+  text-decoration: none;
+  position: fixed;
+  bottom: 50px;
+  right: 50px;
+  border-radius: 10px;
+  background: linear-gradient(110deg, rgba(187, 20, 226), rgba(21, 32, 227));
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-color: none;
+  border: none;
+  padding: 15px;
+  padding-left: 40px;
+  padding-right: 40px;
+  color: #f9f9f9;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  z-index: 3;
+}
+
+.fab:hover {
+  color: #f9f9f9;
+}
 
 input.checkmark {
   margin-right: 10px;
@@ -272,16 +280,34 @@ input.checkmark {
   height: 10rem;
   width: 10rem;
   position: absolute;
-  top: 65px;
-  left: 65%;
+  top: -38px;
+  right: -70px;
 }
 
 .cirlce2 {
   height: 20rem;
   width: 20rem;
   position: absolute;
-  bottom: -176px;
-  left: 21%;
+  bottom: -121px;
+  z-index: -1;
+  left: -148px;
+}
+
+.cirlce4 {
+  height: 10rem;
+  width: 10rem;
+  position: fixed;
+  top: 28%;
+  left: 15%;
+}
+
+.cirlce3 {
+  height: 20rem;
+  width: 20rem;
+  position: fixed;
+  bottom: 15%;
+  z-index: -1;
+  right: 8%;
 }
 .profile {
   border-radius: 50%;
@@ -350,8 +376,5 @@ input.checkmark {
   border-radius: 10px !important;
   z-index: 2;
   backdrop-filter: blur(20px);
-  padding: 60px;
-  padding-bottom: 70px;
-  padding-left: 80px;
-  padding-right: 80px;
+  padding: 25px 40px 25px 40px;
 }

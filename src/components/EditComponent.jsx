@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import usericonedit from "/usericon.svg";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import blob1 from "/blob1.svg";
+import blob2 from "/blob2.svg";
 const EditComponent = ({ onAddeditCont, contact, onCancel, verifyEdit }) => {
   const [editname, seteditname] = useState("");
   const [editphone, seteditphone] = useState("");
@@ -25,8 +27,6 @@ const EditComponent = ({ onAddeditCont, contact, onCancel, verifyEdit }) => {
     }
     // console.log(contact);
   }, [contact]);
-
-  console.log(`initial value : ${check}`);
 
   const onHandeleeditName = (e) => {
     seteditname(e.target.value);
@@ -119,11 +119,9 @@ const EditComponent = ({ onAddeditCont, contact, onCancel, verifyEdit }) => {
   };
   return (
     <>
-      <div className="col-lg-6 mx-auto">
-        {/* <img src={blob1} alt="blob1" className="cirlce1" />
-      <img src={blob2} alt="blob2" className="cirlce2" /> */}
-
+      <div className="col-lg-5 mx-auto">
         <div className="add_content">
+          <img src={blob1} alt="blob1" className="cirlce1" />
           <form onSubmit={onhandleEdit} className="formcard">
             <label htmlFor="imagepickerEdit" className="">
               <img
@@ -197,30 +195,35 @@ const EditComponent = ({ onAddeditCont, contact, onCancel, verifyEdit }) => {
                 Mark as Star
               </span>
             </label>
-            <button
-              className="text-uppercase button mt-5"
-              type="submit"
-              color="primary "
-              style={{
-                padding: "15px",
-                fontSize: "18px",
-              }}
+            <div
+              className="d-flex w-100 justify-content-evenly"
+              style={{ "column-gap": "50px" }}
             >
-              Update Contact
-            </button>
-
-            <button
-              className="text-uppercase button mt-5"
-              type="button"
-              onClick={onCancel}
-              style={{
-                padding: "15px",
-                fontSize: "18px",
-              }}
-            >
-              Cancel
-            </button>
+              <button
+                className="text-uppercase button mt-5"
+                type="submit"
+                color="primary "
+                style={{
+                  padding: "15px",
+                  fontSize: "18px",
+                }}
+              >
+                Update
+              </button>
+              <button
+                className="text-uppercase button mt-5"
+                type="button"
+                onClick={onCancel}
+                style={{
+                  padding: "15px",
+                  fontSize: "18px",
+                }}
+              >
+                Cancel
+              </button>
+            </div>
           </form>
+          <img src={blob2} alt="blob2" className="cirlce2" />
         </div>
       </div>
     </>
