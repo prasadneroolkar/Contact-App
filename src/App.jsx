@@ -39,11 +39,11 @@ function App() {
       },
     ];
     setContact(newContacts);
-    console.log(newContacts);
+    // console.log(newContacts);
     // toast.success("Contact added successfully!");
   };
 
-  const updateEdit = (cid, contname, contphone, email, area, prof) => {
+  const updateEdit = (cid, contname, contphone, email, area, prof, star) => {
     const updatedCont = cont.map((elem) => {
       console.log(elem);
 
@@ -55,6 +55,7 @@ function App() {
             email,
             area,
             profileImg: prof,
+            star: star,
           }
         : elem;
     });
@@ -75,7 +76,7 @@ function App() {
       return ele.id === ide;
     });
     setEditContact(editedData);
-    console.log(editedData);
+    // console.log(editedData);
   };
   const cancelEdit = () => {
     setEditContact([]);
@@ -85,6 +86,7 @@ function App() {
     <>
       <nav className="nav">
         <p>Contact App</p>
+        <Link to="/">Home</Link> <Link to="/contacts">Contacts</Link>
       </nav>
       <Routes>
         <Route

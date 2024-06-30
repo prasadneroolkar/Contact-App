@@ -9,6 +9,7 @@ const EditComponent = ({ onAddeditCont, contact, onCancel, verifyEdit }) => {
   const [editaddress, seteditAddress] = useState("");
   const [profileEditImage, setProfileEditImage] = useState(null);
   const [profileEditImageUrl, setProfileEditImageUrl] = useState(null);
+  const [check, setCheck] = useState(false);
 
   useEffect(() => {
     if (contact) {
@@ -18,8 +19,12 @@ const EditComponent = ({ onAddeditCont, contact, onCancel, verifyEdit }) => {
       seteditAddress(contact.area || "");
       setProfileEditImage(contact.profileImg || null);
       setProfileEditImageUrl(contact.profileImg || usericonedit);
+      setCheck(contact.star || "");
     }
+    // console.log(contact);
   }, [contact]);
+
+  console.log(`initial value : ${check}`);
 
   const onHandeleeditName = (e) => {
     seteditname(e.target.value);
@@ -43,6 +48,11 @@ const EditComponent = ({ onAddeditCont, contact, onCancel, verifyEdit }) => {
       setProfileEditImage(fileEdit);
       setProfileEditImageUrl(URL.createObjectURL(fileEdit));
     }
+  };
+
+  const onHandeleeditCheck = () => {
+    setCheck(!check);
+    // setCheck(e, target);
   };
 
   const onhandleEdit = (e) => {
@@ -80,7 +90,8 @@ const EditComponent = ({ onAddeditCont, contact, onCancel, verifyEdit }) => {
         editphone,
         editemail,
         editaddress,
-        profileEditImageBase64
+        profileEditImageBase64,
+        check
       );
       seteditname("");
       seteditphone("");
@@ -88,6 +99,7 @@ const EditComponent = ({ onAddeditCont, contact, onCancel, verifyEdit }) => {
       seteditAddress("");
       setProfileEditImage(null);
       setProfileEditImageUrl(null);
+      setCheck("");
       toast.success("Contact updated successfully!");
     };
     if (profileEditImage) {
@@ -104,7 +116,6 @@ const EditComponent = ({ onAddeditCont, contact, onCancel, verifyEdit }) => {
   };
   return (
     <>
-      {" "}
       <div className="col-lg-6 mx-auto">
         {/* <img src={blob1} alt="blob1" className="cirlce1" />
       <img src={blob2} alt="blob2" className="cirlce2" /> */}
@@ -165,7 +176,13 @@ const EditComponent = ({ onAddeditCont, contact, onCancel, verifyEdit }) => {
               onChange={onHandeleeditAddr}
             />
             <label className="mt-2">
-              <input className="checkmark" type="checkbox" />
+              <input
+                className="checkmark"
+                type="checkbox"
+                onChange={onHandeleeditCheck}
+                checked={check}
+                // {(!check) ? "checked" :"unchecked"}
+              />
               <span
                 className="text-right"
                 style={{
