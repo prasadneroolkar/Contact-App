@@ -378,3 +378,56 @@ input.checkmark {
   backdrop-filter: blur(20px);
   padding: 25px 40px 25px 40px;
 }
+
+@media only screen and (max-width: 768px) {
+  .profile {
+    width: 60px;
+    height: 60px;
+  }
+
+  .contact_content {
+    padding: 15px;
+  }
+  .name {
+    font-size: 14px;
+  }
+  .phone {
+    font-size: 14px;
+  }
+  .mail {
+    font-size: 14px;
+  }
+  .contact_content {
+    display: grid;
+  }
+  .contact-desc p {
+    word-break: break-word;
+  }
+  .iconbtn {
+    margin-right: 0;
+  }
+
+  .contact-details {
+    display: grid;
+    grid-template-columns: auto auto 190px;
+  }
+  .contact_op {
+    margin-top: 10px;
+    margin-left: 30px;
+  }
+
+  .cirlce3,
+  .cirlce4 {
+    display: none;
+  }
+  .fab {
+    bottom: 50px;
+    right: 13px;
+    border-radius: 50%;
+
+    padding: 15px;
+    padding-left: 20px;
+    padding-right: 20px;
+    color: #f9f9f9;
+  }
+}

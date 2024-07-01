@@ -7,6 +7,7 @@ import Contacts from "./components/Contacts";
 import AddComponent from "./components/AddComponent";
 import { useEffect, useState } from "react";
 import EditComponent from "./components/EditComponent";
+import nocontact from "/nocontacts.jpg";
 import {
   BrowserRouter as Router,
   Route,
@@ -121,7 +122,15 @@ function App() {
           element={
             <Container>
               {cont.length === 0 ? (
-                "No Contacts listed"
+                <img
+                  src={nocontact}
+                  alt="No Contacts"
+                  style={{
+                    margin: "auto",
+                    width: "500px",
+                    height: "100%",
+                  }}
+                />
               ) : (
                 <Contacts
                   listdata={cont}

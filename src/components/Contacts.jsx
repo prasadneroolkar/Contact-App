@@ -10,6 +10,9 @@ const Contacts = ({ listdata, onDeleteData, onEditData }) => {
     onDeleteData(index);
   };
 
+  const isMobile = window.matchMedia("(max-width: 768px)").matches;
+  const linkText = isMobile ? "+" : "Add Contact";
+
   const onhandleEdit = (index) => {
     onEditData(index);
   };
@@ -51,11 +54,10 @@ const Contacts = ({ listdata, onDeleteData, onEditData }) => {
                   />
                 </div>
 
-                <div>
+                <div className="iconbtn">
                   <Link
                     to={`/edit/${item.id}`}
-                    className="iconbtn"
-                    style={{ marginRight: "30px" }}
+                    // style={{ marginRight: "30px" }}
                     onClick={() => onhandleEdit(item.id)}
                   >
                     <MdEdit className="icon" color="#54eafe" />
@@ -68,7 +70,7 @@ const Contacts = ({ listdata, onDeleteData, onEditData }) => {
         <img src={blob2} alt="blob2" className="cirlce3" />
 
         <Link to="/" className="fab sticky-bottom d-print-inline-flex">
-          Add Contact
+          {linkText}
         </Link>
       </div>
     </>
