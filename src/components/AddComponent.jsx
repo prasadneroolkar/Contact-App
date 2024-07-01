@@ -5,6 +5,8 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import blob1 from "/blob1.svg";
 import blob2 from "/blob2.svg";
+import { Link } from "react-router-dom";
+import { GrView } from "react-icons/gr";
 
 const AddComponent = ({ onAddCont, verify }) => {
   const [name, setname] = useState("");
@@ -175,6 +177,9 @@ const AddComponent = ({ onAddCont, verify }) => {
             </button>
           </form>
           <img src={blob2} alt="blob2" className="cirlce2" />
+          <Link to="/contacts" className="view-contacts-link">
+            <GrView /> View Contacts
+          </Link>
         </div>
       </div>
     </>

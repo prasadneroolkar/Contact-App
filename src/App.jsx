@@ -93,7 +93,7 @@ function App() {
     <>
       <nav className="nav">
         <p>Contact App</p>
-        <Link to="/">Home</Link> <Link to="/contacts">Contacts</Link>
+        {/* <Link to="/">Home</Link> <Link to="/contacts">Contacts</Link> */}
       </nav>
       <Routes>
         <Route

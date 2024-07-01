@@ -4,8 +4,15 @@ import { MdDelete, MdEdit } from "react-icons/md";
 import { Link } from "react-router-dom";
 import blob1 from "/blob1.svg";
 import blob2 from "/blob2.svg";
+import { useState } from "react";
 
 const Contacts = ({ listdata, onDeleteData, onEditData }) => {
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const searchItem = listdata.filter((item) => {
+    return item.name.toLowerCase().includes(searchTerm.toLowerCase());
+  });
+
   const onhandleDel = (index) => {
     onDeleteData(index);
   };
@@ -19,8 +26,21 @@ const Contacts = ({ listdata, onDeleteData, onEditData }) => {
   return (
     <>
       <div className="col-lg-9 mx-auto add_content">
+        <div className="d-flex justify-content-center">
+          <input
+            className="input w-50 mb-5"
+            type="text"
+            placeholder="Search.."
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </div>
         <img src={blob1} alt="blob1" className="cirlce4" />
-        {listdata.map((item) => {
+        {searchItem.length === 0 && (
+          <div className="no-results w-75 m-auto">
+            <p>No contacts found matching {searchTerm}</p>
+          </div>
+        )}
+        {searchItem.map((item) => {
           return (
             <div className="contact_content mb-4" key={item.id}>
               <div className="contact-details">

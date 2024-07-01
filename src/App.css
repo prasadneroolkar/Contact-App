@@ -431,3 +431,37 @@ input.checkmark {
     color: #f9f9f9;
   }
 }
+
+.no-results {
+  text-align: center;
+  padding: 20px;
+  border: 2px dashed #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  margin-top: 20px;
+  color: #666;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.no-results p {
+  margin: 0;
+}
+
+.no-results p span {
+  color: #ff6370; /* Highlighted color for search term */
+}
+
+.view-contacts-link {
+  text-align: right;
+  display: block;
+  margin-top: 20px;
+  color: #54eafe;
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.view-contacts-link:hover {
+  color: #ff8a00;
+}
