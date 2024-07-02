@@ -8,6 +8,7 @@ import AddComponent from "./components/AddComponent";
 import { useEffect, useState } from "react";
 import EditComponent from "./components/EditComponent";
 import nocontact from "/nocontacts.jpg";
+import { contextCreate } from "./context";
 import {
   BrowserRouter as Router,
   Route,
@@ -17,8 +18,6 @@ import {
 } from "react-router-dom";
 
 function App() {
-  // const contacts = [];
-
   const [cont, setContact] = useState(() => {
     return JSON.parse(localStorage.getItem("ContactList")) || [];
   });
@@ -91,58 +90,54 @@ function App() {
 
   return (
     <>
-      <nav className="nav">
-        <p>Contact App</p>
-        {/* <Link to="/">Home</Link> <Link to="/contacts">Contacts</Link> */}
-      </nav>
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Container>
-              <AddComponent onAddCont={handleAdd} verify={cont} />
-            </Container>
-          }
-        />
-        <Route
-          path="/edit/:edit"
-          element={
-            <Container>
-              <EditComponent
-                contact={editContact}
-                onAddeditCont={updateEdit}
-                onCancel={cancelEdit}
-                verifyEdit={cont}
-              />
-            </Container>
-          }
-        />
-        <Route
-          path="/contacts"
-          element={
-            <Container>
-              {cont.length === 0 ? (
-                <img
-                  src={nocontact}
-                  alt="No Contacts"
-                  style={{
-                    margin: "auto",
-                    width: "500px",
-                    height: "100%",
-                  }}
+      <contextCreate.Provider value={cont}>
+        <nav className="nav">
+          <p>Contact App</p>
+        </nav>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Container>
+                <AddComponent onAddCont={handleAdd} />
+              </Container>
+            }
+          />
+          <Route
+            path="/edit/:edit"
+            element={
+              <Container>
+                <EditComponent
+                  contact={editContact}
+                  onAddeditCont={updateEdit}
+                  onCancel={cancelEdit}
                 />
-              ) : (
-                <Contacts
-                  listdata={cont}
-                  onDeleteData={handleDel}
-                  onEditData={handleEdit}
-                />
-              )}
-            </Container>
-          }
-        />
-      </Routes>
-      <ToastContainer />
+              </Container>
+            }
+          />
+          <Route
+            path="/contacts"
+            element={
+              <Container>
+                {cont.length === 0 ? (
+                  <img
+                    src={nocontact}
+                    alt="No Contacts"
+                    style={{
+                      margin: "auto",
+                      width: "500px",
+                      height: "100%",
+                    }}
+                  />
+                ) : (
+                  <Contacts onDeleteData={handleDel} onEditData={handleEdit} />
+                )}
+              </Container>
+            }
+          />
+        </Routes>
+        <ToastContainer />
+      </contextCreate.Provider>
     </>
   );
 }

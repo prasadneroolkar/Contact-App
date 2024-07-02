@@ -5,11 +5,14 @@ import { Link } from "react-router-dom";
 import blob1 from "/blob1.svg";
 import blob2 from "/blob2.svg";
 import { useState } from "react";
+import { useContext } from "react";
+import { contextCreate } from "../context";
 
-const Contacts = ({ listdata, onDeleteData, onEditData }) => {
+const Contacts = ({ onDeleteData, onEditData }) => {
+  const contContext = useContext(contextCreate);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const searchItem = listdata.filter((item) => {
+  const searchItem = contContext.filter((item) => {
     return item.name.toLowerCase().includes(searchTerm.toLowerCase());
   });
 

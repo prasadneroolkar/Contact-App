@@ -5,7 +5,12 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import blob1 from "/blob1.svg";
 import blob2 from "/blob2.svg";
-const EditComponent = ({ onAddeditCont, contact, onCancel, verifyEdit }) => {
+import { useContext } from "react";
+import { contextCreate } from "../context";
+
+const EditComponent = ({ onAddeditCont, contact, onCancel }) => {
+  const contContext = useContext(contextCreate);
+
   const [editname, seteditname] = useState("");
   const [editphone, seteditphone] = useState("");
   const [editemail, seteditEmail] = useState("");
@@ -68,7 +73,7 @@ const EditComponent = ({ onAddeditCont, contact, onCancel, verifyEdit }) => {
     // Check if email is being updated and already exists
     if (
       editemail !== contact.email &&
-      verifyEdit.some((cont) => cont.email === editemail)
+      contContext.some((cont) => cont.email === editemail)
     ) {
       toast.error("Email is already in use.");
       return;
@@ -77,7 +82,7 @@ const EditComponent = ({ onAddeditCont, contact, onCancel, verifyEdit }) => {
     // Check if phone number is being updated and already exists
     if (
       editphone !== contact.phone &&
-      verifyEdit.some(
+      contContext.some(
         (cont) => cont.phone === editphone && cont.id !== contact.id
       )
     ) {
@@ -106,15 +111,18 @@ const EditComponent = ({ onAddeditCont, contact, onCancel, verifyEdit }) => {
       navigate("/contacts");
     };
     if (profileEditImage) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const profileEditImageBase64 = reader.result;
-        addContactEdit(profileEditImageBase64);
-      };
-      reader.readAsDataURL(profileEditImage);
+      if (profileEditImage instanceof Blob) {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          const profileEditImageBase64 = reader.result;
+          addContactEdit(profileEditImageBase64);
+        };
+        reader.readAsDataURL(profileEditImage);
+      } else {
+        toast.error("Invalid image file.");
+      }
     } else {
-      // Handle case where no profile image is selected
-      addContactEdit(contact.profileImg); // or null, or any default value you want to use
+      addContactEdit(contact.profileImg); // or null, or
     }
   };
   return (

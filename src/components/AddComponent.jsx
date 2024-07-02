@@ -7,8 +7,12 @@ import blob1 from "/blob1.svg";
 import blob2 from "/blob2.svg";
 import { Link } from "react-router-dom";
 import { GrView } from "react-icons/gr";
+import { useContext } from "react";
+import { contextCreate } from "../context";
 
-const AddComponent = ({ onAddCont, verify }) => {
+const AddComponent = ({ onAddCont }) => {
+  const contContext = useContext(contextCreate);
+
   const [name, setname] = useState("");
   const [phone, setphone] = useState("");
   const [email, setEmail] = useState("");
@@ -53,11 +57,11 @@ const AddComponent = ({ onAddCont, verify }) => {
     }
 
     // Check for existing email or phone number
-    if (verify.some((contact) => contact.email === email)) {
+    if (contContext.some((contact) => contact.email === email)) {
       toast.error("Email is already in use.");
       return;
     }
-    if (verify.some((contact) => contact.phone === phone)) {
+    if (contContext.some((contact) => contact.phone === phone)) {
       toast.error("Phone number is already in use.");
       return;
     }
