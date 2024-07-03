@@ -3,7 +3,7 @@
   "private": false,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://prasadneroolkar.github.io/Contact-App/",
+  "homepage": "https://prasadneroolkar.github.io/Contact-App",
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",

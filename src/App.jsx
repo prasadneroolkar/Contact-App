@@ -96,7 +96,8 @@ function App() {
         </nav>
         <Routes>
           <Route
-            path="/"
+            exact
+            path="/Contact-App"
             element={
               <Container>
                 <AddComponent onAddCont={handleAdd} />
