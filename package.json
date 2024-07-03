@@ -1,6 +1,6 @@
 {
   "name": "contact_app",
-  "private": true,
+  "private": false,
   "version": "0.0.0",
   "type": "module",
   "homepage": "https://prasadneroolkar.github.io/Contact-App/",
