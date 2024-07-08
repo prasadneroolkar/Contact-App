@@ -1,3 +1,6 @@
 import { createContext } from "react";
 
-export const contextCreate = createContext();
+export const contextCreate = createContext({
+  cont: [],
+  handleAdd: () => {},
+});

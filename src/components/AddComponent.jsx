@@ -10,8 +10,8 @@ import { GrView } from "react-icons/gr";
 import { useContext } from "react";
 import { contextCreate } from "../context";
 
-const AddComponent = ({ onAddCont }) => {
-  const contContext = useContext(contextCreate);
+const AddComponent = () => {
+  const { cont, handleAdd } = useContext(contextCreate);
 
   const [name, setname] = useState("");
   const [phone, setphone] = useState("");
@@ -48,7 +48,7 @@ const AddComponent = ({ onAddCont }) => {
     setCheck(!check);
   };
 
-  const handleAdd = (e) => {
+  const handleAddsubmit = (e) => {
     e.preventDefault();
     // Check if any field is empty
     if (name === "" || phone === "" || email === "") {
@@ -57,16 +57,16 @@ const AddComponent = ({ onAddCont }) => {
     }
 
     // Check for existing email or phone number
-    if (contContext.some((contact) => contact.email === email)) {
+    if (cont.some((contact) => contact.email === email)) {
       toast.error("Email is already in use.");
       return;
     }
-    if (contContext.some((contact) => contact.phone === phone)) {
+    if (cont.some((contact) => contact.phone === phone)) {
       toast.error("Phone number is already in use.");
       return;
     }
     const addContact = (profileImageBase64) => {
-      onAddCont(name, phone, email, address, profileImageBase64, check);
+      handleAdd(name, phone, email, address, profileImageBase64, check);
 
       setname(""); // Clear name field
       setphone(""); // Clear phone field
@@ -96,7 +96,7 @@ const AddComponent = ({ onAddCont }) => {
       <div className="col-lg-5 mx-auto">
         <div className="add_content">
           <img src={blob1} alt="blob1" className="cirlce1" />
-          <form className="formcard" onSubmit={handleAdd}>
+          <form className="formcard" onSubmit={handleAddsubmit}>
             <label htmlFor="imagepicker" className="">
               <img
                 src={profileImageUrl || usericon}

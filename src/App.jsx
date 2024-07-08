@@ -90,7 +90,7 @@ function App() {
 
   return (
     <>
-      <contextCreate.Provider value={cont}>
+      <contextCreate.Provider value={{ cont, handleAdd }}>
         <nav className="nav">
           <p>Contact App</p>
         </nav>

@@ -9,10 +9,10 @@ import { useContext } from "react";
 import { contextCreate } from "../context";
 
 const Contacts = ({ onDeleteData, onEditData }) => {
-  const contContext = useContext(contextCreate);
+  const { cont } = useContext(contextCreate);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const searchItem = contContext.filter((item) => {
+  const searchItem = cont.filter((item) => {
     return item.name.toLowerCase().includes(searchTerm.toLowerCase());
   });
 
