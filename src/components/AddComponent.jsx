@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import usericon from "/usericon.svg";
 import { toast } from "react-toastify";
@@ -12,44 +12,34 @@ import { contextCreate } from "../context";
 
 const AddComponent = () => {
   const { cont, handleAdd } = useContext(contextCreate);
-
-  const [name, setname] = useState("");
-  const [phone, setphone] = useState("");
-  const [email, setEmail] = useState("");
-  const [address, setAddress] = useState("");
-  const [profileImage, setProfileImage] = useState(null);
   const [profileImageUrl, setProfileImageUrl] = useState(null);
-  const [check, setCheck] = useState(false);
   const navigate = useNavigate();
 
-  const onHandeleName = (e) => {
-    setname(e.target.value);
-  };
+  const nameRef = useRef();
+  const phoneRef = useRef();
+  const emailRef = useRef();
+  const addressRef = useRef();
+  const checkRef = useRef(false);
+  const profimgRef = useRef();
 
-  const onHandelePhone = (e) => {
-    setphone(e.target.value);
-  };
-
-  const onHandeleEmail = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const onHandeleAddr = (e) => {
-    setAddress(e.target.value);
-  };
   const handleProfileImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setProfileImage(file);
       setProfileImageUrl(URL.createObjectURL(file));
+    } else {
+      setProfileImageUrl(null);
     }
-  };
-  const handleCheck = () => {
-    setCheck(!check);
   };
 
   const handleAddsubmit = (e) => {
     e.preventDefault();
+    const name = nameRef.current.value;
+    const phone = phoneRef.current.value;
+    const email = emailRef.current.value;
+    const address = addressRef.current.value;
+    const check = checkRef.current.checked;
+    const file = profimgRef.current.files[0];
+
     // Check if any field is empty
     if (name === "" || phone === "" || email === "") {
       toast.error("Please fill all details.");
@@ -68,24 +58,26 @@ const AddComponent = () => {
     const addContact = (profileImageBase64) => {
       handleAdd(name, phone, email, address, profileImageBase64, check);
 
-      setname(""); // Clear name field
-      setphone(""); // Clear phone field
-      setEmail(""); // Clear email field
-      setAddress(""); // Clear area field
-      setProfileImage(null);
+      nameRef.current.value = "";
+      phoneRef.current.value = "";
+      emailRef.current.value = "";
+      addressRef.current.value = "";
+      checkRef.current.checked = "false";
+      profimgRef.current.value = "";
+
       setProfileImageUrl(null);
-      setCheck(null);
+
       toast.success("Contact added successfully!");
 
       navigate("/contacts");
     };
-    if (profileImage) {
+    if (file) {
       const reader = new FileReader();
       reader.onloadend = () => {
         const profileImageBase64 = reader.result;
         addContact(profileImageBase64);
       };
-      reader.readAsDataURL(profileImage);
+      reader.readAsDataURL(file);
     } else {
       addContact(null);
     }
@@ -104,6 +96,7 @@ const AddComponent = () => {
                 className="profile"
               />
               <input
+                ref={profimgRef}
                 type="file"
                 name="image"
                 id="imagepicker"
@@ -116,46 +109,38 @@ const AddComponent = () => {
 
             <input
               className="input mt-4"
+              ref={nameRef}
               type="text"
               name="name"
-              value={name}
               placeholder="Name"
-              onChange={onHandeleName}
             />
             <input
               className="input mt-3"
               type="email"
               name="email"
               id="email"
-              value={email}
+              ref={emailRef}
               placeholder="Email"
-              onChange={onHandeleEmail}
             />
             <input
               className="input mt-3"
               type="tel"
               name="phonenumber"
               id="phonenumber"
-              value={phone}
+              ref={phoneRef}
               placeholder="phone number"
-              onChange={onHandelePhone}
             />
             <input
               type="textarea"
               name="area"
               id="area"
               placeholder="address"
-              value={address}
+              ref={addressRef}
               className="input mt-3 mb-2"
               style={{ height: "80px" }}
-              onChange={onHandeleAddr}
             />
             <label className="mt-2">
-              <input
-                className="checkmark"
-                type="checkbox"
-                onChange={handleCheck}
-              />
+              <input className="checkmark" type="checkbox" ref={checkRef} />
               <span
                 className="text-right"
                 style={{
