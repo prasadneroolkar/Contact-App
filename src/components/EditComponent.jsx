@@ -9,13 +9,13 @@ import { useContext } from "react";
 import { contextCreate } from "../context";
 
 const EditComponent = ({ onAddeditCont, contact, onCancel }) => {
-  const contContext = useContext(contextCreate);
+  const { cont } = useContext(contextCreate);
 
   const [editname, seteditname] = useState("");
   const [editphone, seteditphone] = useState("");
   const [editemail, seteditEmail] = useState("");
   const [editaddress, seteditAddress] = useState("");
-  const [profileEditImage, setProfileEditImage] = useState(null);
+  const [profileEditImage, setProfileEditImage] = useState();
   const [profileEditImageUrl, setProfileEditImageUrl] = useState(null);
   const [check, setCheck] = useState(false);
   const navigate = useNavigate();
@@ -30,7 +30,6 @@ const EditComponent = ({ onAddeditCont, contact, onCancel }) => {
       setProfileEditImageUrl(contact.profileImg || usericonedit);
       setCheck(contact.star || "");
     }
-    // console.log(contact);
   }, [contact]);
 
   const onHandeleeditName = (e) => {
@@ -73,7 +72,7 @@ const EditComponent = ({ onAddeditCont, contact, onCancel }) => {
     // Check if email is being updated and already exists
     if (
       editemail !== contact.email &&
-      contContext.some((cont) => cont.email === editemail)
+      cont.some((conti) => conti.email === editemail)
     ) {
       toast.error("Email is already in use.");
       return;
@@ -82,9 +81,7 @@ const EditComponent = ({ onAddeditCont, contact, onCancel }) => {
     // Check if phone number is being updated and already exists
     if (
       editphone !== contact.phone &&
-      contContext.some(
-        (cont) => cont.phone === editphone && cont.id !== contact.id
-      )
+      cont.some((conti) => conti.phone === editphone && conti.id !== contact.id)
     ) {
       toast.error("Phone number is already in use.");
       return;
