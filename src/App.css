@@ -14,6 +14,11 @@ body {
   background-color: #171b2f;
   color: white;
 }
+html,
+body {
+  height: 100%;
+  overflow-x: hidden;
+}
 nav {
   flex-wrap: wrap;
   display: flex;
